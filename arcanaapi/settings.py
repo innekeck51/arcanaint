@@ -25,7 +25,7 @@ SECRET_KEY = '36&l$xjmbp!=hy1mzb$8u455v$9akrv@8lmx(znv0jy_=6lz3='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "www.arcana-intelligent.id", "arcana-intelligent.id"]
 
 
 # Application definition
@@ -124,3 +124,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+ 
+STATICFILES_DIRS = [str(BASE_DIR)+"/assets/"]
+ 
+STATIC_ROOT = '/home/arcanain/arcana-intelligent.id/static/'
+
+MEDIA_ROOT = '/home/arcanain/arcana-intelligent.id/media/'

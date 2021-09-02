@@ -40,9 +40,9 @@ class ClimateAnalyzer():
         # karena bayesopt perlu objective yg greater is better
         return score
 
-    def handle_file_upload(self, f):
+    def handle_file_upload(self, f, inputParam):
         self.df = pd.read_excel(f, engine='openpyxl')
-        inputTable = ['TempMax', 'CurahHujan']
+        inputTable = inputParam.split(',')
         df = self.df[inputTable]
         df = df.replace(8888.0, np.nan)
         df = df.replace(9999.0, np.nan)

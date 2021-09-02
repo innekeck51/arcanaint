@@ -73,5 +73,6 @@ class StationView(APIView):
 class ClimateAnalyzeView(APIView):
     def post(self, request):
         ca = ClimateAnalyzer()
-        buff = ca.handle_file_upload(request.FILES['file'])
+        buff = ca.handle_file_upload(
+            request.FILES['file'], request.POST.get('column', ''))
         return HttpResponse(buff.getvalue(), content_type='image/jpeg')

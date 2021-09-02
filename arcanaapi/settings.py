@@ -25,7 +25,8 @@ SECRET_KEY = '36&l$xjmbp!=hy1mzb$8u455v$9akrv@8lmx(znv0jy_=6lz3='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "www.arcana-intelligent.id", "arcana-intelligent.id"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost",
+                 "www.arcana-intelligent.id", "arcana-intelligent.id"]
 
 
 # Application definition

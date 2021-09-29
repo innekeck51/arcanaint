@@ -7,12 +7,15 @@ from rest_framework import viewsets
 from .serializers import RegionSerializer, StationSerializer
 from .models import Region, Station
 from .climate import ClimateAnalyzer
+from .lithology import Lithology
 from rest_framework.views import APIView
 
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from api.lib.promethee import Promethee
+
+import json
 
 
 class RegionViewSet(viewsets.ModelViewSet):
@@ -75,4 +78,12 @@ class ClimateAnalyzeView(APIView):
         ca = ClimateAnalyzer()
         buff = ca.handle_file_upload(
             request.FILES['file'], request.POST.get('column', ''))
-        return HttpResponse(buff.getvalue(), content_type='image/jpeg')
+        return HttpResponse(buff.getvalue(), content_type='image/png')
+
+
+class LithologyView(APIView):
+    def post(self, request):
+        l = Lithology()
+        buff = l.lithology_classification(
+            request.FILES['file'], request.POST.get('input_borehole', ''), json.loads(request.POST.get('input_dict', '')))
+        return HttpResponse(buff.getvalue(), content_type='image/png')

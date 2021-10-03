@@ -8,6 +8,7 @@ from .serializers import RegionSerializer, StationSerializer
 from .models import Region, Station
 from .climate import ClimateAnalyzer
 from .lithology import Lithology
+from .calories_mapping import CaloriesMapping
 from rest_framework.views import APIView
 
 from rest_framework import status
@@ -87,3 +88,11 @@ class LithologyView(APIView):
         buff = l.lithology_classification(
             request.FILES['file'], request.POST.get('input_borehole', ''), json.loads(request.POST.get('input_dict', '')))
         return HttpResponse(buff.getvalue(), content_type='image/png')
+
+
+class CaloriesMappingView(APIView):
+    def post(self, request):
+        cm = CaloriesMapping()
+        dump = cm.get_long_lat(
+            request.FILES['file'], request.POST.get('level_calories', ''))
+        return HttpResponse(json.dumps(dump), content_type='application/json')

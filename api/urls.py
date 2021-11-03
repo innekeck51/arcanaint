@@ -12,5 +12,7 @@ urlpatterns = [
     path('regions/<int:id>/stations', views.StationView.as_view()),
     path('climate/excel', views.ClimateAnalyzeView.as_view()),
     path('lithology/classification', views.LithologyView.as_view()),
-    path('calories-mapping', views.CaloriesMappingView.as_view())
+    path('calories-mapping', views.CaloriesMappingView.as_view()),
+    path('ucg', views.UCGView.as_view()),
+    path('astm', views.ASTMView.as_view())
 ]

@@ -9,6 +9,8 @@ from .models import Region, Station
 from .climate import ClimateAnalyzer
 from .lithology import Lithology
 from .calories_mapping import CaloriesMapping
+from .ucg import UCG
+from .astm import ASTM
 from rest_framework.views import APIView
 
 from rest_framework import status
@@ -100,3 +102,22 @@ class CaloriesMappingView(APIView):
         dump = cm.get_long_lat(
             request.FILES['file'], request.POST.get('level_calories', ''))
         return HttpResponse(json.dumps(dump), content_type='application/json')
+
+
+class UCGView(APIView):
+    def post(self, request):
+        ucg = UCG()
+        result = ucg.calculateUCG(request.FILES['file'])
+        return HttpResponse(result, content_type='application/json')
+
+
+class ASTMView(APIView):
+    def post(self, request):
+        astm = ASTM()
+        buff = astm.calculateLSTM(
+            request.FILES['file'], request.POST.get('borehole', ''), request.POST.get('type', ''))
+        resp = HttpResponse(buff.getvalue(), content_type='image/svg+xml')
+        resp['Access-Control-Allow-Origin'] = '*'
+        resp['Access-Control-Allow-Headers'] = 'Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, Access-Control-Allow-Origin'
+        resp['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        return resp

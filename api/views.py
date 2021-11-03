@@ -87,7 +87,11 @@ class LithologyView(APIView):
         l = Lithology()
         buff = l.lithology_classification(
             request.FILES['file'], request.POST.get('input_borehole', ''), json.loads(request.POST.get('input_dict', '')))
-        return HttpResponse(buff.getvalue(), content_type='image/png')
+        resp = HttpResponse(buff.getvalue(), content_type='image/png')
+        resp['Access-Control-Allow-Origin'] = '*'
+        resp['Access-Control-Allow-Headers'] = 'Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, Access-Control-Allow-Origin'
+        resp['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        return resp
 
 
 class CaloriesMappingView(APIView):

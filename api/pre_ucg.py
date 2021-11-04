@@ -24,7 +24,7 @@ class PreUCG():
 
         df['Rasio'] = df.apply(f, axis=1)
 
-        data2 = data2.loc[df['Borehole Name'] == "MJ01"]
+        data2 = data2.loc[df['Borehole Name'] == boreholeName]
         df2 = pd.DataFrame(data2)
 
         # membuat kolom baru untuk Roof dan Floor

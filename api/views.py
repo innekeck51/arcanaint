@@ -10,6 +10,7 @@ from .climate import ClimateAnalyzer
 from .lithology import Lithology
 from .calories_mapping import CaloriesMapping
 from .ucg import UCG
+from .pre_ucg import PreUCG
 from .astm import ASTM
 from rest_framework.views import APIView
 
@@ -121,3 +122,11 @@ class ASTMView(APIView):
         resp['Access-Control-Allow-Headers'] = 'Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, Access-Control-Allow-Origin'
         resp['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
         return resp
+
+
+class PreUCGVIew(APIView):
+    def post(self, request):
+        preucg = PreUCG()
+        result = preucg.calculateUCG(
+            request.FILES['file'], request.POST.get('borehole', 'MJ01'))
+        return HttpResponse(result, content_type='application/json')
